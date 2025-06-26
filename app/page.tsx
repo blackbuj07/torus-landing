@@ -1,103 +1,98 @@
-import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { CheckCircle, ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="p-6 max-w-5xl mx-auto space-y-10">
+      <section className="text-center space-y-4">
+        <h1 className="text-4xl font-bold tracking-tight">Outperforming NOVOS, Designed for You</h1>
+        <p className="text-lg text-muted-foreground">
+          TORUS isn’t just another longevity stack. We personalize every protocol using your real-world biology, aiming for energy, performance, and visible results.
+        </p>
+      </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card>
+          <CardContent className="p-6 space-y-4">
+            <h2 className="text-2xl font-semibold">🔬 NOVOS Protocol</h2>
+            <ul className="space-y-2 text-muted-foreground">
+              <li><CheckCircle className="inline mr-2 text-green-500" />Targets 12 hallmarks of aging</li>
+              <li><CheckCircle className="inline mr-2 text-green-500" />Mouse-model lifespan data</li>
+              <li><CheckCircle className="inline mr-2 text-green-500" />Evidence-based ingredient stack</li>
+              <li><CheckCircle className="inline mr-2 text-yellow-500" />Static monthly supplement pack</li>
+              <li><CheckCircle className="inline mr-2 text-yellow-500" />No personalization or biomarker input</li>
+              <li><CheckCircle className="inline mr-2 text-red-500" />No dynamic feedback loop or app</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card className="border-2 border-primary">
+          <CardContent className="p-6 space-y-4">
+            <h2 className="text-2xl font-semibold">🚀 TORUS Protocol</h2>
+            <ul className="space-y-2 text-muted-foreground">
+              <li><CheckCircle className="inline mr-2 text-green-500" />Biomarker-driven personalization (methylation, blood, wearables)</li>
+              <li><CheckCircle className="inline mr-2 text-green-500" />Live protocol optimization from biofeedback</li>
+              <li><CheckCircle className="inline mr-2 text-green-500" />Visible results: skin, libido, cognition, energy</li>
+              <li><CheckCircle className="inline mr-2 text-green-500" />Includes cutting-edge molecules (Urolithin A, Spermidine, Senolytics)</li>
+              <li><CheckCircle className="inline mr-2 text-green-500" />Optimized dosing for your age + phenotype</li>
+              <li><CheckCircle className="inline mr-2 text-green-500" />Weekly insights through dashboard & app</li>
+            </ul>
+          </CardContent>
+        </Card>
+      </section>
+
+      <div className="text-center pt-8">
+        <Button className="text-lg px-8 py-6 font-semibold">
+          Join the Founding Cohort <ArrowRight className="ml-2" />
+        </Button>
+      </div>
+      <form
+        className="space-y-4 border-t pt-8 mt-8 max-w-md mx-auto"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const form = e.currentTarget;
+          const formData = new FormData(form);
+          const res = await fetch('/api/signup', {
+            method: 'POST',
+            body: JSON.stringify({
+              name: formData.get('name'),
+              email: formData.get('email'),
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+
+          if (res.ok) {
+            alert('Thanks! You’re in.');
+            form.reset();
+          } else {
+            alert('Something went wrong.');
+          }
+        }}
+      >
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          required
+          className="w-full px-4 py-2 border rounded-xl"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          className="w-full px-4 py-2 border rounded-xl"
+        />
+        <button
+          type="submit"
+          className="bg-black text-white px-6 py-3 rounded-xl font-semibold"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          Join Waitlist
+        </button>
+      </form>
     </div>
   );
 }
